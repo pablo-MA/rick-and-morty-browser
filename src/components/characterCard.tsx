@@ -18,7 +18,7 @@ export function CharacterCard({ character }: CharacterCardProps){
     const isFavorite = true
 
     return ( 
-        <Card key={character.id}>
+        <Card key={character.id} className='transition-transform duration-200 hover:-translate-y-1 hover:shadow-md'>
             <CardContent className='relative'>
             <img src={character.image} className='w-[400px]'/>
             <div className="rounded-full absolute top-3 right-3 bg-white">
