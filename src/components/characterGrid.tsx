@@ -48,10 +48,14 @@ const GET_CHARACTERS: TypedDocumentNode<
   }
 `;
 
-export function CharacterGrid() {
+type CharacterGridProps = {
+  searchName: string;
+};
+
+export function CharacterGrid({searchName}: CharacterGridProps) {
 
     const { loading, error, data } = useQuery(GET_CHARACTERS, {
-        variables: { name: '' },
+        variables: { name: searchName },
     });
 
     if (loading) return <div>Loading</div>;

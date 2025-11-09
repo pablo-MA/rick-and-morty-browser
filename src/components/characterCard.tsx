@@ -13,11 +13,11 @@ const statusColors: Record<string, string> = {
     unknown: "bg-gray-500",
 };
 
-type CharacterCarProps = {
+type CharacterCardProps = {
     character: Character;
 }
 
-export function CharacterCard({ character }: CharacterCarProps){
+export function CharacterCard({ character }: CharacterCardProps){
     // Only for testing, should be removed
     const isFavorite = true
 

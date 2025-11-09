@@ -45,6 +45,11 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+body {
+  min-width: 320px;
+  min-height: 100vh;
+}
+
 @import "tailwindcss";
 
 @import "tw-animate-css";
