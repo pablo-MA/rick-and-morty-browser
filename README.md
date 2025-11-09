@@ -1,8 +1,8 @@
-# Rick and Mory Browser
+# Rick and Morty Character Browser
 
-Coding Challenge
+Simple Rick and Morty character browsing app. You can search Characters and add them to your favorites list.
 
-## Stack
+## 🛠️ Technologies used:
 - Vite
 - React
 - Typescript
@@ -10,3 +10,14 @@ Coding Challenge
 - Shadcn
 - Apollo/Client
 - Zustand
+
+## 🚀 Setup Instructions
+```bash
+git clone https://github.com/pablo-MA/rick-and-morty-browser.git
+cd rick-and-morty-browser
+
+npm install
+npm run dev
+```
+
+## 🕒 Finished in 8 hours

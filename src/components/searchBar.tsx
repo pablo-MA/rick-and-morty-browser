@@ -9,7 +9,6 @@ type SearchBarProps = {
 }
 
 export function SearchBar({ searchName, onChange, reset }: SearchBarProps) {
-
   return (
     <div className="container flex justify-center m-5">
       <InputGroup className="w-8/10 md:w-3/4 xl:w-2/4">

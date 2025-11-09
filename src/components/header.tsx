@@ -8,7 +8,6 @@ type HeaderProps = {
 
 export function Header({isFavoritesView, changeView} : HeaderProps) {
   const { characters: favorites } = useFavoritesStore();
-
   return (
     <header className='bg-linear-to-r from-[#E0F3F6] to-[#F9FAFB]'>
       <div className="container flex justify-between p-4">
