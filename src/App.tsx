@@ -5,7 +5,8 @@ import { type TypedDocumentNode } from "@apollo/client";
 import { Header } from "./components/header"
 import { useState } from 'react';
 import { SearchBar } from "./components/searchBar";
-import { Error } from "@/components/error"
+import { Error } from "@/components/error";
+import { EmptyMsg } from "@/components/emptyMsg";
 import { useDebounce } from "@/hooks/useDebounce";
 
 type GetCharactersQuery = {
@@ -72,7 +73,9 @@ function App() {
       <SearchBar searchName={searchName} onUpdate={setSearchName}/>
       {
         error ? <Error errorMsg={error.message}/>
-        : <CharacterGrid characters={data?.characters.results ?? []} loading={loading}/> 
+        : data && data.characters.results.length !== 0 
+          ? <CharacterGrid characters={data.characters.results} loading={loading}/> 
+          : <EmptyMsg /> 
       }
     </div>
   )
