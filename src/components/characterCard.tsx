@@ -11,14 +11,15 @@ const statusColors: Record<string, string> = {
 
 type CharacterCardProps = {
     character: Character;
+    onClick: (character: Character) => void;
 }
 
-export function CharacterCard({ character }: CharacterCardProps){
+export function CharacterCard({ character, onClick }: CharacterCardProps){
     // Only for testing, should be removed
     const isFavorite = true
 
     return ( 
-        <Card key={character.id} className='transition-transform duration-200 hover:-translate-y-1 hover:shadow-md'>
+        <Card key={character.id} className='transition-transform duration-200 hover:-translate-y-1 hover:shadow-md' onClick={() => onClick(character)}>
             <CardContent className='relative'>
             <img src={character.image} className='w-[400px]'/>
             <div className="rounded-full absolute top-3 right-3 bg-white">

@@ -10,6 +10,8 @@ import { EmptyMsg } from "@/components/emptyMsg";
 import { useDebounce } from "@/hooks/useDebounce";
 import { GridPagination } from "./components/gridPagination";
 import type { Info, Character } from "@/types/character";
+import { CharacterContainer } from "@/components/characterContainer";
+import { FavoritesContainer } from "./components/favoritesContainer";
 
 type GetCharactersQuery = {
   characters: {
@@ -48,47 +50,18 @@ const GET_CHARACTERS: TypedDocumentNode<
 
 
 function App() {
-  // Searchbar states
-  const [searchName, setSearchName] = useState<string>('');
-
-  // Pagination state1
-  const [currPage, setCurrPage] = useState<number>(1);
-
-  // Debounce on searchName input and calls reset Page
-  const debouncedSearch = useDebounce(searchName);
-
-  useEffect(() => {
-    setCurrPage(1);
-  }, [debouncedSearch]);
-
-  // Query data from GraphQL API
-  const { loading, error, data } = useQuery(GET_CHARACTERS, {
-      variables: { 
-        page: currPage,
-        name: debouncedSearch 
-      },
-  });
-
-  const resetSearch = () => {
-    setSearchName('');
-    setCurrPage(1);
-  }
+  // container states
+  const [isFavoritesView , setIsFavoritesView ] = useState<boolean>(false);
 
   return (
     <div>
-      <Header />
-      <SearchBar searchName={searchName} onChange={setSearchName} reset={resetSearch}/>
-      {
-        error ? <Error errorMsg={error.message}/>
-        : <CharacterGrid characters={data?.characters.results ?? []} loading={loading}/>
-        // : data && data.characters.results.length !== 0 
-        //   ? <CharacterGrid characters={data.characters.results} loading={loading}/> 
-        //   : <EmptyMsg /> 
-      }
-      {
-        (data?.characters.results) && <EmptyMsg />
-      }
-      {data?.characters.info.pages && <GridPagination info={data.characters.info} currPage={currPage} changePage={setCurrPage}/>}
+      <Header isFavoritesView={isFavoritesView} changeView={setIsFavoritesView}/>
+      <main className="container">
+        {!isFavoritesView
+          ? <CharacterContainer />
+          : <FavoritesContainer />
+        }
+      </main>
     </div>
   )
 }
