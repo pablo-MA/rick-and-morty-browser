@@ -28,10 +28,10 @@ export function CharacterCard({ character }: CharacterCardProps) {
   };
 
   return (
-    <Card key={character.id} className='transition-transform duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer'>
+    <Card key={character.id} className='transition-transform duration-200 hover:-translate-y-1 hover:shadow-md'>
       <CardContent className='relative'>
         <img src={character.image} className='w-[400px]' />
-        <div className="w-9 h-9 rounded-full absolute top-3 right-3 bg-white flex items-center justify-center"
+        <div className="w-9 h-9 rounded-full absolute top-3 right-3 bg-white flex items-center justify-center cursor-pointer"
           onClick={toggleFavorite}
         >
           <Heart size={20} className={

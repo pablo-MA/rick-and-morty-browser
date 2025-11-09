@@ -14,7 +14,7 @@ export function Header({isFavoritesView, changeView} : HeaderProps) {
         <h2 className='font-bold text-2xl'>Rick & Morty Browser</h2>
         <div className='flex gap-1'>
           <Button className={
-            `text-md font-medium
+            `text-md font-medium cursor-pointer
             ${isFavoritesView 
               ? "bg-transparent hover:bg-[#d3f8fd] text-black" 
               : "bg-[#00B5CC] hover:bg-[#80dde9]"}
@@ -22,13 +22,13 @@ export function Header({isFavoritesView, changeView} : HeaderProps) {
             onClick={() => changeView(false)}
             >All Characters</Button>
           <Button className={
-            `text-md font-medium
+            `text-md font-medium cursor-pointer
             ${!isFavoritesView 
               ? "bg-transparent hover:bg-[#d3f8fd] text-black" 
               : "bg-[#00B5CC] hover:bg-[#80dde9]"}
             `}
             onClick={() => changeView(true)}
-          >Favorites ( {favorites.length} )</Button>
+          >Favorites ({favorites.length})</Button>
         </div>
       </div>
     </header>
