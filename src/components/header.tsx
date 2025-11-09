@@ -22,13 +22,13 @@ export function Header({isFavoritesView, changeView} : HeaderProps) {
             onClick={() => changeView(false)}
             >All Characters</Button>
           <Button className={
-            `text-md font-medium cursor-pointer
+            `text-md font-medium cursor-pointer w-30
             ${!isFavoritesView 
               ? "bg-transparent hover:bg-[#d3f8fd] text-black" 
               : "bg-[#00B5CC] hover:bg-[#80dde9]"}
             `}
             onClick={() => changeView(true)}
-          >Favorites ({favorites.length})</Button>
+          >Favorites <span className="inline-block w-4 text-center">({favorites.length})</span></Button>
         </div>
       </div>
     </header>
