@@ -2,6 +2,7 @@ import type { Character } from '@/types/character';
 import { Badge } from "@/components/ui/badge";
 import { Heart } from "lucide-react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { useFavoritesStore } from '@/store';
 
 const statusColors: Record<string, string> = {
     Alive: "bg-green-500",
@@ -11,23 +12,31 @@ const statusColors: Record<string, string> = {
 
 type CharacterCardProps = {
     character: Character;
-    onClick: (character: Character) => void;
 }
 
-export function CharacterCard({ character, onClick }: CharacterCardProps){
+export function CharacterCard({ character }: CharacterCardProps){
+    const { characters: favorites, add, remove } = useFavoritesStore();
     // Only for testing, should be removed
-    const isFavorite = true
+    const isFavorite = favorites.some((fav) => fav.id === character.id)
+
+     const toggleFavorite = () => {
+        if (isFavorite) {
+            remove(character);
+        } else {
+            add(character);
+        }
+    };
 
     return ( 
-        <Card key={character.id} className='transition-transform duration-200 hover:-translate-y-1 hover:shadow-md' onClick={() => onClick(character)}>
+        <Card key={character.id} className='transition-transform duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer'>
             <CardContent className='relative'>
             <img src={character.image} className='w-[400px]'/>
-            <div className="rounded-full absolute top-3 right-3 bg-white">
-                <Heart className={`
-                m-1 p-1 transition
+            <div className="rounded-full absolute top-3 right-3 bg-white" onClick={toggleFavorite}>
+                <Heart size={28} className={`
+                m-1 p-1 transition duration-400 ease-in-out
                 ${isFavorite 
                     ? "text-red-600 fill-red-600" 
-                    : "text-black"}
+                    : "text-[#4A5565] fill-transparent"}
                 `}
                 />
                 </div>
