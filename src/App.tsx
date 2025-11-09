@@ -5,8 +5,8 @@ import { type TypedDocumentNode } from "@apollo/client";
 import { Header } from "./components/header"
 import { useState } from 'react';
 import { SearchBar } from "./components/searchBar";
-import { CharacterGridSkeleton } from "./components/characterGridSkeleton";
 import { Error } from "@/components/error"
+import { useDebounce } from "@/hooks/useDebounce";
 
 type GetCharactersQuery = {
   characters: {
@@ -55,28 +55,21 @@ const GET_CHARACTERS: TypedDocumentNode<
 
 
 function App() {
+  // Searchbar states
   const [searchName, setSearchName] = useState<string>('');
 
-  const updateSearchName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchValue = e.target.value;
-    setSearchName(searchValue);
-  }
+  // Debounce
+  const debouncedSearch = useDebounce(searchName);
 
   // Query data from GraphQL API
   const { loading, error, data } = useQuery(GET_CHARACTERS, {
-      variables: { name: searchName },
+      variables: { name: debouncedSearch },
   });
-  
-      // if (loading) return <CharacterGridSkeleton />;
-      // if (error) return <Error errorMsg={error.message}/>
-  
-      console.log(data?.characters);
-
 
   return (
     <div className=''>
       <Header />
-      <SearchBar searchName={searchName} onUpdate={updateSearchName}/>
+      <SearchBar searchName={searchName} onUpdate={setSearchName}/>
       {
         error ? <Error errorMsg={error.message}/>
         : <CharacterGrid characters={data?.characters.results ?? []} loading={loading}/> 
