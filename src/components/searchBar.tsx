@@ -4,19 +4,16 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group"
 
 type SearchBarProps = {
   searchName: string;
-  onUpdate: (value: string) => void;
+  onChange: (value: string) => void;
+  reset: () => void;
 }
 
-export function SearchBar({ searchName, onUpdate }: SearchBarProps) {
-
-  const clearSearch = () => {
-    onUpdate('');
-  }
+export function SearchBar({ searchName, onChange, reset }: SearchBarProps) {
 
   return (
     <div className="container flex justify-center m-5">
       <InputGroup className="w-8/10 md:w-3/4 xl:w-2/4">
-        <InputGroupInput placeholder="Search characters.." value={searchName} onChange={(e) => onUpdate(e.target.value)} />
+        <InputGroupInput placeholder="Search characters.." value={searchName} onChange={(e) => onChange(e.target.value)} />
         <InputGroupAddon>
           <Search />
         </InputGroupAddon>
@@ -24,7 +21,7 @@ export function SearchBar({ searchName, onUpdate }: SearchBarProps) {
           searchName !== '' && 
           <InputGroupAddon align="inline-end">
             <div className="flex size-4 items-center justify-center">
-              <Button className="bg-transparent hover:bg-transparent text-primary" onClick={clearSearch}> <X /> </Button>
+              <Button className="bg-transparent hover:bg-transparent text-primary" onClick={reset}> <X /> </Button>
             </div>
           </InputGroupAddon>
         }

@@ -7,3 +7,10 @@ export type Character = {
     species: string;
     image: string;
 };
+
+export type Info = {
+    count: number;
+    pages: number;
+    next: string;
+    prev: string;
+}
