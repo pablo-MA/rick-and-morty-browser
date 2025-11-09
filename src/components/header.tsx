@@ -9,7 +9,7 @@ type HeaderProps = {
 export function Header({isFavoritesView, changeView} : HeaderProps) {
   const { characters: favorites } = useFavoritesStore();
   return (
-    <header className='bg-linear-to-r from-[#E0F3F6] to-[#F9FAFB]'>
+    <header className='bg-linear-to-r from-[#E0F3F6] to-[#F9FAFB] border-b border-gray-200'>
       <div className="container flex justify-between p-4">
         <h2 className='font-bold text-2xl'>Rick & Morty Browser</h2>
         <div className='flex gap-1'>
