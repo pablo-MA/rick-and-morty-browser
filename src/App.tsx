@@ -80,9 +80,13 @@ function App() {
       <SearchBar searchName={searchName} onChange={setSearchName} reset={resetSearch}/>
       {
         error ? <Error errorMsg={error.message}/>
-        : data && data.characters.results.length !== 0 
-          ? <CharacterGrid characters={data.characters.results} loading={loading}/> 
-          : <EmptyMsg /> 
+        : <CharacterGrid characters={data?.characters.results ?? []} loading={loading}/>
+        // : data && data.characters.results.length !== 0 
+        //   ? <CharacterGrid characters={data.characters.results} loading={loading}/> 
+        //   : <EmptyMsg /> 
+      }
+      {
+        (data?.characters.results) && <EmptyMsg />
       }
       {data?.characters.info.pages && <GridPagination info={data.characters.info} currPage={currPage} changePage={setCurrPage}/>}
     </div>
