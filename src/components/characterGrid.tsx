@@ -1,68 +1,19 @@
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client/react";
-import { type TypedDocumentNode } from "@apollo/client";
-import { CharacterCard } from '@/components/characterCard';
-
-type GetCharactersQuery = {
-  characters: {
-    info: {
-      count: number;
-      pages: number;
-      next: number | null;
-      prev: number | null;
-    }
-    results: Array<{
-      id: string;
-      name: string;
-      status: string;
-      species: string;
-      image: string;
-    }>;
-  };
-};
-
-type GetCharactersQueryVariables = {
-  name: string
-};
-
-const GET_CHARACTERS: TypedDocumentNode<
-  GetCharactersQuery,
-  GetCharactersQueryVariables
-> = gql`
-  query GetCharacters($name: String!) {
-      characters(page: 1, filter: { name: $name }) {
-        info {
-        count
-        pages
-        next
-        prev
-      }
-      results {
-        id
-        name
-        status
-        species
-        image
-      }
-    }
-  }
-`;
+import type { Character } from '@/types/character'
+import { CharacterCard } from './characterCard';
+import { CharacterGridSkeleton } from './characterGridSkeleton';
 
 type CharacterGridProps = {
-  searchName: string;
+  characters: Character[];
+  loading: boolean;
 };
 
-export function CharacterGrid({searchName}: CharacterGridProps) {
+export function CharacterGrid({characters, loading = false}: CharacterGridProps) {
 
-    const { loading, error, data } = useQuery(GET_CHARACTERS, {
-        variables: { name: searchName },
-    });
-
-    if (loading) return <div>Loading</div>;
-    if (error) return <div>Error : {error.message}</div>;
-
-    console.log(data?.characters);
-    return data?.characters.results.map((character) => (
-      <CharacterCard character={character}/>
-    ));
+    return (
+        <div className="container grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 mt-10 gap-4 justify-items-center xl:justify-items-normal">
+            {!loading 
+            ? characters.map((character) => (<CharacterCard character={character}/>))
+            : <CharacterGridSkeleton />}
+        </div>
+    )
 }

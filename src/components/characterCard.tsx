@@ -1,11 +1,7 @@
 import type { Character } from '@/types/character';
 import { Badge } from "@/components/ui/badge";
 import { Heart } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card"
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 const statusColors: Record<string, string> = {
     Alive: "bg-green-500",
